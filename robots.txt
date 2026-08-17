@@ -7,4 +7,7 @@ Disallow: /orto/
 Disallow: /qr/
 Disallow: /_riservato/
 Disallow: /tools/
+Disallow: /modulo/
 Allow: /
+
+Sitemap: https://www.spaziosanmagno.it/sitemap.xml

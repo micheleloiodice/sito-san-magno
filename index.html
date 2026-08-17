@@ -444,7 +444,7 @@
         </select>
         <label for="c-messaggio">Messaggio</label>
         <textarea id="c-messaggio" name="messaggio" rows="4" maxlength="4000" placeholder="Periodo desiderato, numero di partecipanti, esigenze particolari..."></textarea>
-        <div class="esca" aria-hidden="true"><input type="text" name="esca" tabindex="-1" autocomplete="off"></div>
+        <div class="esca" aria-hidden="true"><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"></div>
         <button type="submit" class="btn btn-primary" id="c-invia" style="border:none;align-self:flex-start;">Invia richiesta</button>
         <p class="esito" id="c-esito" role="status" aria-live="polite"></p>
         <p class="privacy">I dati inseriti servono solo a rispondere alla tua richiesta: non vengono usati per altri scopi né comunicati a terzi. Titolare del trattamento: Spazio San Magno, <a href="mailto:info@spaziosanmagno.it">info@spaziosanmagno.it</a>.</p>
@@ -524,13 +524,18 @@
 
   /* ==========================================================================
      MODULO DI PRENOTAZIONE
-     Il sito e' statico e non puo' inviare email: la richiesta viene inoltrata
-     a un Cloudflare Worker che la passa a Resend (vedi modulo/LEGGIMI-modulo.md).
-     >>> Incolla qui sotto l'indirizzo del Worker, al posto di DA-CONFIGURARE.
+     Il sito e' statico e non puo' inviare email da solo: la richiesta viene
+     inoltrata da Web3Forms, che la recapita a info@spaziosanmagno.it.
+     Istruzioni complete in modulo/LEGGIMI-modulo.md
+
+     >>> Incolla qui sotto la "access key" di Web3Forms al posto di DA-CONFIGURARE.
+     La chiave non e' un segreto: puo' solo consegnare alla casella a cui e'
+     stata associata, e si puo' rigenerare in qualsiasi momento.
+
      Finche' resta DA-CONFIGURARE il modulo NON finge di aver inviato: propone
      di scrivere per email, con il messaggio gia' compilato.
      ========================================================================== */
-  var ENDPOINT = 'DA-CONFIGURARE';
+  var CHIAVE_MODULO = '2f22ab2d-cb11-4b70-a02e-fcc6e4607208';
   var POSTA = 'info@spaziosanmagno.it';
 
   (function(){
@@ -538,7 +543,7 @@
     if (!f) return;
     var esito = document.getElementById('c-esito');
     var invia = document.getElementById('c-invia');
-    var attivo = ENDPOINT.indexOf('DA-CONFIGURARE') < 0;
+    var attivo = CHIAVE_MODULO.indexOf('DA-CONFIGURARE') < 0;
 
     function mostra(classe, html){
       esito.className = 'esito' + (classe ? ' ' + classe : '');
@@ -571,26 +576,30 @@
       invia.textContent = 'Invio in corso…';
       mostra('', '');
 
-      fetch(ENDPOINT, {
+      fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
         body: JSON.stringify({
-          nome: f.elements.nome.value,
-          email: f.elements.email.value,
-          tipo: f.elements.tipo.value,
-          messaggio: f.elements.messaggio.value,
-          esca: f.elements.esca.value
+          access_key: CHIAVE_MODULO,
+          subject: 'Richiesta di visita: ' + f.elements.tipo.value + ' - ' + f.elements.nome.value,
+          from_name: 'Sito Spazio San Magno',
+          replyto: f.elements.email.value,
+          'Nome e cognome': f.elements.nome.value,
+          'Email': f.elements.email.value,
+          'Tipo di visita': f.elements.tipo.value,
+          'Messaggio': f.elements.messaggio.value,
+          botcheck: f.elements.botcheck.checked
         })
       })
       .then(function(r){
         return r.json().catch(function(){ return {}; }).then(function(j){ return {ok: r.ok, dati: j}; });
       })
       .then(function(res){
-        if (res.ok && res.dati.ok){
+        if (res.ok && res.dati.success){
           f.reset();
           mostra('ok', 'Grazie! La richiesta &egrave; stata inviata: ti ricontatteremo per confermare data e orario.');
         } else {
-          ripiego(res.dati.errore || 'Invio non riuscito.');
+          ripiego('Invio non riuscito.');
         }
       })
       .catch(function(){

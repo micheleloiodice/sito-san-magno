@@ -164,16 +164,22 @@ togli quella dicitura dalle tre lingue (`da verificare` / `to verify` /
   in arrivo". Per inserire le foto: aggiungi le immagini al sito e sostituisci
   il blocco `.hero` in `assets/orto.css` / la funzione `vistaScheda` in
   `assets/orto.js` con un `<img>`.
-- **`poster-restauro.jpg`**: la homepage lo indica come anteprima del video, ma
-  il file non c'è ancora (il video funziona comunque).
+- **Anteprima del video**: l'attributo `poster` è stato rimosso perché
+  l'immagine non esiste. Quando avrai un fotogramma da usare come copertina,
+  rimetti `poster="poster-restauro.jpg"` nel tag `<video>`: nel codice c'è un
+  commento che lo ricorda.
 - **Modulo di prenotazione**: al momento mostra solo il messaggio di conferma,
   non invia nulla. Per riceverle davvero serve un servizio di inoltro form
   (Formspree, Basin o simili) oppure un `mailto:`.
-- **Indirizzo del sito**: i QR sono stati generati per
-  `https://www.spaziosanmagno.it/`. Se l'indirizzo definitivo è diverso,
-  modifica `base_url` in `tools/config.json`, rilancia il generatore e
-  **ristampa le etichette** (le chiavi restano invariate, cambia solo
-  l'indirizzo dentro il codice).
+- **Sezioni messe in pausa**: il calendario mese per mese delle attività e
+  l'elenco dei partner sono stati rimossi dalla homepage in attesa,
+  rispettivamente, delle date definitive e della conferma di ciascuna realtà.
+  Lo stile CSS di entrambi resta in `index.html`, marcato come non utilizzato,
+  per poterli reinserire senza rifare la grafica. Le versioni complete sono
+  recuperabili dalla cronologia git e da `tools/originali-orto/`.
+- **Dati strutturati della posizione**: la homepage ha il segnaposto Maps con
+  le coordinate `41.038645, 16.349511`, ma non i dati `schema.org` che
+  aiuterebbero Google a mostrare il luogo nei risultati di ricerca.
 
 ---
 
@@ -189,3 +195,41 @@ py -m http.server 8765
 Poi apri `http://localhost:8765/index.html`. Per aprire una scheda senza
 scansionare nulla, usa `_riservato/indice-schede.html`: elenca le venti piante
 con i link già sbloccati, comodo per rileggere e correggere i testi.
+
+---
+
+## 8. Come è pubblicato
+
+Il sito è ospitato su **GitHub Pages**, gratuitamente, dal repository pubblico
+`micheleloiodice/sito-san-magno` (ramo `main`, cartella radice). Il dominio
+`www.spaziosanmagno.it` punta a Pages con un record CNAME verso
+`micheleloiodice.github.io`.
+
+Il repository contiene **solo** i file pubblici: `index.html`, `robots.txt`,
+`assets/`, `orto/` e la documentazione. Le cartelle `_riservato/`, `qr/` e
+`tools/` restano su questo computer — vedi il paragrafo 1 e il file
+`.gitignore`. Essere un repository pubblico non è un problema: le schede sono
+cifrate e la chiave non è mai stata caricata.
+
+**Il video non è nel repository.** Pesa 37 MB e l'upload dal browser di GitHub
+si fermava a 25 MB, quindi è allegato alla *release* con tag `media`. Il tag
+`<video>` in `index.html` ha due sorgenti: prima quella della release, poi il
+file `video.webm` locale, usata quando apri il sito dalla cartella o senza
+rete. Se rigeneri la release, il tag deve restare `media`, altrimenti
+l'indirizzo nella pagina non corrisponde più.
+
+### Aggiornare il sito
+
+La cartella su questo computer è la fonte, GitHub è la copia pubblicata:
+modifica sempre qui, prova in locale, poi carica. Su GitHub, *Add file →
+Upload files*, trascinando i file cambiati: avendo lo stesso nome sostituiscono
+i precedenti. Dopo circa un minuto Pages ripubblica; se non vedi il
+cambiamento, ricarica con `Ctrl+F5`.
+
+Due avvertenze: **non cancellare il file `CNAME`** creato da GitHub, altrimenti
+il dominio si scollega; e non modificare a mano i file in `orto/`, che sono
+cifrati — si passa sempre da `tools/specie.json` e dal generatore.
+
+Nota tecnica: la cronologia git locale e quella su GitHub sono separate, perché
+i file sono stati caricati la prima volta dal browser. Per questo `git push`
+verrebbe rifiutato: va prima riallineata la cronologia.

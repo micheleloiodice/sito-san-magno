@@ -147,7 +147,9 @@
   .terr h3{font-size:16px;margin-bottom:4px;}
   .terr p{font-size:14px;margin-bottom:0;}
 
-  /* PARTNERS */
+  /* PARTNER — stile dell'elenco dei partner, per ora non usato in pagina:
+     i nomi verranno reinseriti dopo la conferma di ciascuna realta'.
+     Si conserva per poterlo ripristinare senza rifare lo stile. */
   .partners{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
   .partner{background:var(--terra-scuro);border:1px solid #5a6845;border-radius:10px;padding:12px 18px;font-size:14px;color:var(--crema-2);}
 
@@ -161,6 +163,13 @@
   .info-row svg{width:24px;height:24px;color:var(--oro);flex:0 0 24px;margin-top:3px;}
   .info-row .it{font-size:15px;color:var(--crema-2);}
   .info-row .it span{display:block;font-size:13px;color:#b9ad95;}
+  .mappa{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px;}
+  .mappa a.vai{display:inline-flex;align-items:center;gap:8px;background:var(--oro);color:var(--terra-scuro);padding:9px 17px;border-radius:22px;font-size:14px;font-weight:500;transition:background .2s;}
+  .mappa a.vai:hover{background:#e6c25e;}
+  .mappa a.vai svg{width:16px;height:16px;flex:0 0 16px;color:var(--terra-scuro);margin:0;}
+  .mappa a.alt{color:#e6dcc6;font-size:13.5px;border-bottom:1px solid rgba(230,220,198,.35);padding-bottom:1px;}
+  .mappa a.alt:hover{color:var(--oro);border-bottom-color:var(--oro);}
+  .info-row .it span.coord{margin-top:10px;font-size:12.5px;color:#a99c84;letter-spacing:.3px;-webkit-user-select:all;user-select:all;}
 
   /* FOOTER */
   footer{background:var(--terra-scuro);color:#c4bba4;padding:46px 0 28px;font-size:14px;}
@@ -272,7 +281,12 @@
       </div>
       <div>
         <div class="video-frame">
-          <video controls preload="metadata" playsinline poster="poster-restauro.jpg">
+          <!-- Il video pesa 37 MB e non sta nel repository: e' allegato alla release
+               "media" su GitHub. La seconda sorgente e' il file nella cartella locale,
+               usata quando si apre il sito dal computer o senza rete. Se in futuro
+               aggiungi un'immagine di anteprima, rimetti poster="poster-restauro.jpg". -->
+          <video controls preload="metadata" playsinline>
+            <source src="https://github.com/micheleloiodice/sito-san-magno/releases/download/media/video.webm" type="video/webm">
             <source src="video.webm" type="video/webm">
             Il tuo browser non supporta la riproduzione del video.
           </video>
@@ -362,7 +376,7 @@
       <div class="card">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#534ab7" stroke-width="1.5"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 015-5h2a5 5 0 015 5v2M16 3.5a3 3 0 010 7M21 21v-2a5 5 0 00-3-4.5"/></svg></div>
         <h3>Inclusione sociale</h3>
-        <p>Percorsi con la Casa Famiglia, le neurodiversità e l'Unione Italiana Ciechi: il paesaggio come esperienza percettiva e momento di aggregazione.</p>
+        <p>Percorsi dedicati alle fasce fragili e alle neurodiversità: il paesaggio come esperienza percettiva e momento di aggregazione.</p>
       </div>
     </div>
 
@@ -388,7 +402,7 @@
       </div>
       <div class="terr">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C7 2 4 6 4 11c0 6 8 11 8 11s8-5 8-11c0-5-3-9-8-9z"/><circle cx="12" cy="10" r="2.5"/></svg>
-        <div><h3>Parco Nazionale Alta Murgia</h3><p>Zona C "Aree di protezione", Rete Natura 2000 (ZPS-ZSC), candidatura a UNESCO Geopark.</p></div>
+        <div><h3>Parco Nazionale Alta Murgia</h3><p>Zona C "Aree di protezione", Rete Natura 2000 (ZPS-ZSC), Geoparco Mondiale UNESCO.</p></div>
       </div>
       <div class="terr">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3C9 6 9 18 12 21"/><circle cx="12" cy="12" r="9"/></svg>
@@ -396,20 +410,6 @@
       </div>
     </div>
 
-    <h3 style="color:#fdfaf2;margin-top:46px;margin-bottom:6px;">La rete di collaborazioni</h3>
-    <p style="margin-bottom:0;">Il progetto fa sistema con un partenariato di associazioni e istituzioni del territorio.</p>
-    <div class="partners">
-      <span class="partner">Archeoclub – Corato/BAT</span>
-      <span class="partner">Ente Parco Alta Murgia</span>
-      <span class="partner">Accademia Musicale "La Stravaganza"</span>
-      <span class="partner">Ass. culturale "Harambè"</span>
-      <span class="partner">Cinovìa – Centro escursionistico cinofilo</span>
-      <span class="partner">UNISCO Network per lo sviluppo locale</span>
-      <span class="partner">Alliance Française – Bari</span>
-      <span class="partner">Linea D'Onda</span>
-      <span class="partner">Casa Famiglia di Corato</span>
-      <span class="partner">Unione Italiana Ciechi – Corato</span>
-    </div>
   </div>
 </section>
 
@@ -440,7 +440,22 @@
       <div style="background:var(--terra);border-radius:16px;padding:32px;color:var(--crema-2);">
         <div class="info-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2C7.5 2 4 5.5 4 10c0 6 8 12 8 12s8-6 8-12c0-4.5-3.5-8-8-8z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          <div class="it">Contrada San Magno<span>S.P. 19 km 10+250 · Corato (BA) — Foglio 93</span></div>
+          <div class="it">Contrada San Magno<span>S.P. 19 km 10+250 · Corato (BA) — Foglio 93</span>
+            <!-- ============================================================
+                 POSIZIONE DEL BENE — 41.038645, 16.349511
+                 Le coordinate compaiono in tre punti: i due link qui sotto e
+                 la riga visibile con le coordinate. Se andassero corrette,
+                 vanno aggiornate in tutti e tre.
+                 ============================================================ -->
+            <div class="mappa">
+              <a class="vai" href="https://www.google.com/maps/dir/?api=1&amp;destination=41.038645,16.349511" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C7.5 2 4 5.5 4 10c0 6 8 12 8 12s8-6 8-12c0-4.5-3.5-8-8-8z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                Indicazioni stradali
+              </a>
+              <a class="alt" href="https://www.google.com/maps/search/?api=1&amp;query=41.038645,16.349511" target="_blank" rel="noopener">Vedi sulla mappa</a>
+            </div>
+            <span class="coord">Coordinate: 41.038645, 16.349511</span>
+          </div>
         </div>
         <div class="info-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8 9.6a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>
@@ -452,7 +467,7 @@
         </div>
         <div class="info-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <div class="it">Come arrivare<span>A 15 km da Corato, raggiungibile anche in bicicletta. Bike-sharing in progetto con il Comune.</span></div>
+          <div class="it">Come arrivare<span>A 15 km da Corato, raggiungibile anche in bicicletta.</span></div>
         </div>
         <div style="border-top:1px solid #5a6845;margin-top:8px;padding-top:18px;font-size:14px;color:#cdc4ac;">Il giardino botanico è curato dall'agronomo Dott. Michele Loiodice. Gestione diretta, attività non economica a fini culturali, educativi e di inclusione.</div>
       </div>

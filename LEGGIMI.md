@@ -168,9 +168,12 @@ togli quella dicitura dalle tre lingue (`da verificare` / `to verify` /
   l'immagine non esiste. Quando avrai un fotogramma da usare come copertina,
   rimetti `poster="poster-restauro.jpg"` nel tag `<video>`: nel codice c'è un
   commento che lo ricorda.
-- **Modulo di prenotazione**: al momento mostra solo il messaggio di conferma,
-  non invia nulla. Per riceverle davvero serve un servizio di inoltro form
-  (Formspree, Basin o simili) oppure un `mailto:`.
+- **Modulo di prenotazione**: il codice è pronto ma va attivato. Segui
+  `modulo/LEGGIMI-modulo.md`: due account gratuiti (Resend e Cloudflare), poi
+  si incolla l'indirizzo del Worker in `index.html` al posto di
+  `DA-CONFIGURARE`. Finché non è attivo il modulo **non** finge di aver
+  inviato: propone di scrivere a `info@spaziosanmagno.it` con il messaggio già
+  compilato.
 - **Sezioni messe in pausa**: il calendario mese per mese delle attività e
   l'elenco dei partner sono stati rimossi dalla homepage in attesa,
   rispettivamente, delle date definitive e della conferma di ciascuna realtà.

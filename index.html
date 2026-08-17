@@ -159,6 +159,14 @@
   label{font-size:13px;color:var(--pietra);margin-bottom:-6px;}
   input,select,textarea{font-family:var(--sans);font-size:15px;padding:12px 14px;border:1px solid var(--bordo);border-radius:10px;background:var(--crema);color:var(--testo);}
   input:focus,select:focus,textarea:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 3px rgba(110,139,84,.15);}
+  .esito{font-size:14px;margin-top:4px;margin-bottom:0;display:none;}
+  .esito.ok{display:block;color:#3b6d11;}
+  .esito.ko{display:block;color:#a32d2d;}
+  .esito a{color:inherit;text-decoration:underline;}
+  .privacy{font-size:12.5px;color:var(--pietra);margin-top:2px;margin-bottom:0;}
+  button[disabled]{opacity:.55;cursor:default;}
+  /* campo esca per i bot: fuori dallo schermo, mai visibile e mai raggiungibile con il tab */
+  .esca{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;}
   .info-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px;}
   .info-row svg{width:24px;height:24px;color:var(--oro);flex:0 0 24px;margin-top:3px;}
   .info-row .it{font-size:15px;color:var(--crema-2);}
@@ -421,23 +429,25 @@
     <p class="eyebrow">Prenota la tua visita</p>
     <h2>Vieni a conoscere San Magno</h2>
     <div class="contact-grid" style="margin-top:36px;">
-      <form onsubmit="event.preventDefault();this.reset();document.getElementById('ok').style.display='block';">
-        <label>Nome e cognome</label>
-        <input type="text" placeholder="Il tuo nome" required>
-        <label>Email</label>
-        <input type="email" placeholder="nome@email.it" required>
-        <label>Tipo di visita</label>
-        <select>
+      <form id="modulo">
+        <label for="c-nome">Nome e cognome</label>
+        <input id="c-nome" name="nome" type="text" placeholder="Il tuo nome" autocomplete="name" maxlength="120" required>
+        <label for="c-email">Email</label>
+        <input id="c-email" name="email" type="email" placeholder="nome@email.it" autocomplete="email" maxlength="200" required>
+        <label for="c-tipo">Tipo di visita</label>
+        <select id="c-tipo" name="tipo">
           <option>Visita guidata individuale</option>
           <option>Gruppo / associazione</option>
           <option>Scuola — laboratorio didattico</option>
           <option>Evento culturale o concerto</option>
           <option>Attività di inclusione sociale</option>
         </select>
-        <label>Messaggio</label>
-        <textarea rows="4" placeholder="Periodo desiderato, numero di partecipanti, esigenze particolari..."></textarea>
-        <button type="submit" class="btn btn-primary" style="border:none;align-self:flex-start;">Invia richiesta</button>
-        <p id="ok" style="display:none;color:#3b6d11;font-size:14px;margin-top:4px;">Grazie! La tua richiesta è stata registrata: ti ricontatteremo per confermare data e orario.</p>
+        <label for="c-messaggio">Messaggio</label>
+        <textarea id="c-messaggio" name="messaggio" rows="4" maxlength="4000" placeholder="Periodo desiderato, numero di partecipanti, esigenze particolari..."></textarea>
+        <div class="esca" aria-hidden="true"><input type="text" name="esca" tabindex="-1" autocomplete="off"></div>
+        <button type="submit" class="btn btn-primary" id="c-invia" style="border:none;align-self:flex-start;">Invia richiesta</button>
+        <p class="esito" id="c-esito" role="status" aria-live="polite"></p>
+        <p class="privacy">I dati inseriti servono solo a rispondere alla tua richiesta: non vengono usati per altri scopi né comunicati a terzi. Titolare del trattamento: Spazio San Magno, <a href="mailto:info@spaziosanmagno.it">info@spaziosanmagno.it</a>.</p>
       </form>
       <div style="background:var(--terra);border-radius:16px;padding:32px;color:var(--crema-2);">
         <div class="info-row">
@@ -511,6 +521,87 @@
   document.querySelectorAll('#menu a').forEach(function(a){
     a.addEventListener('click',function(){document.getElementById('menu').classList.remove('open');});
   });
+
+  /* ==========================================================================
+     MODULO DI PRENOTAZIONE
+     Il sito e' statico e non puo' inviare email: la richiesta viene inoltrata
+     a un Cloudflare Worker che la passa a Resend (vedi modulo/LEGGIMI-modulo.md).
+     >>> Incolla qui sotto l'indirizzo del Worker, al posto di DA-CONFIGURARE.
+     Finche' resta DA-CONFIGURARE il modulo NON finge di aver inviato: propone
+     di scrivere per email, con il messaggio gia' compilato.
+     ========================================================================== */
+  var ENDPOINT = 'DA-CONFIGURARE';
+  var POSTA = 'info@spaziosanmagno.it';
+
+  (function(){
+    var f = document.getElementById('modulo');
+    if (!f) return;
+    var esito = document.getElementById('c-esito');
+    var invia = document.getElementById('c-invia');
+    var attivo = ENDPOINT.indexOf('DA-CONFIGURARE') < 0;
+
+    function mostra(classe, html){
+      esito.className = 'esito' + (classe ? ' ' + classe : '');
+      esito.innerHTML = html;
+    }
+
+    // Indirizzo mailto con la richiesta gia' compilata, usato come ripiego.
+    function perEmail(){
+      var v = function(n){ return (f.elements[n] && f.elements[n].value) || ''; };
+      var oggetto = 'Richiesta di visita: ' + v('tipo');
+      var corpo = 'Nome: ' + v('nome') + '\nEmail: ' + v('email') +
+                  '\nTipo di visita: ' + v('tipo') + '\n\n' + v('messaggio');
+      return 'mailto:' + POSTA + '?subject=' + encodeURIComponent(oggetto) +
+             '&body=' + encodeURIComponent(corpo);
+    }
+
+    function ripiego(premessa){
+      mostra('ko', premessa + ' Puoi scrivere a <a href="' + perEmail() + '">' + POSTA +
+                   '</a>: si apre il programma di posta con la richiesta gi&agrave; compilata.');
+    }
+
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      if (!f.checkValidity()){ f.reportValidity(); return; }
+
+      if (!attivo){ ripiego('L&rsquo;invio automatico non &egrave; ancora attivo.'); return; }
+
+      var etichetta = invia.textContent;
+      invia.disabled = true;
+      invia.textContent = 'Invio in corso…';
+      mostra('', '');
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          nome: f.elements.nome.value,
+          email: f.elements.email.value,
+          tipo: f.elements.tipo.value,
+          messaggio: f.elements.messaggio.value,
+          esca: f.elements.esca.value
+        })
+      })
+      .then(function(r){
+        return r.json().catch(function(){ return {}; }).then(function(j){ return {ok: r.ok, dati: j}; });
+      })
+      .then(function(res){
+        if (res.ok && res.dati.ok){
+          f.reset();
+          mostra('ok', 'Grazie! La richiesta &egrave; stata inviata: ti ricontatteremo per confermare data e orario.');
+        } else {
+          ripiego(res.dati.errore || 'Invio non riuscito.');
+        }
+      })
+      .catch(function(){
+        ripiego('Invio non riuscito, forse per un problema di connessione.');
+      })
+      .then(function(){
+        invia.disabled = false;
+        invia.textContent = etichetta;
+      });
+    });
+  })();
 </script>
 </body>
 </html>

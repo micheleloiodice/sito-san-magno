@@ -1,0 +1,65 @@
+/* ============================================================
+   Spazio San Magno · Schede botaniche dell'orto selvatico
+   Foglio di stile condiviso dalle 20 schede in /orto/
+   ============================================================ */
+
+:root{
+  --terra:#4a5638; --terra-scuro:#3a4429; --verde:#6e8b54; --oliva:#8a9a6a;
+  --oro:#d8b04a; --cotto:#c9714e; --pietra:#7a6f5c;
+  --crema:#fbf7ee; --crema2:#f5efe3; --crema3:#ece3d2; --bordo:#e0d6c2;
+  --testo:#3a3327; --testo2:#5f5849;
+  --serif:Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--crema2);color:var(--testo);line-height:1.7;font-size:17px;-webkit-font-smoothing:antialiased;}
+.page{max-width:640px;margin:0 auto;background:var(--crema);min-height:100vh;display:flex;flex-direction:column;}
+
+/* barra superiore */
+.top{background:var(--terra);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.top a.brand{display:flex;align-items:center;gap:8px;color:var(--crema2);text-decoration:none;font-size:14px;}
+.top a.brand svg{width:20px;height:20px;flex:0 0 20px;}
+.switch{display:flex;gap:4px;}
+.switch button{font-family:var(--sans);background:transparent;border:1px solid #6a7853;color:#cdd3bf;font-size:12px;font-weight:500;padding:5px 11px;border-radius:20px;cursor:pointer;transition:all .15s;}
+.switch button.on{background:var(--oro);border-color:var(--oro);color:var(--terra);}
+
+/* contenitore principale */
+#app{flex:1 0 auto;}
+
+/* ---------- stato SBLOCCATO: la scheda botanica ---------- */
+.hero{height:200px;background:linear-gradient(135deg,#5d6e47,#8a9a6a);display:flex;align-items:center;justify-content:center;position:relative;}
+.hero svg{width:84px;height:84px;stroke:rgba(255,255,255,.75);fill:none;stroke-width:1.2;}
+.hero .num{position:absolute;top:14px;left:18px;font-family:var(--serif);font-size:34px;color:rgba(255,255,255,.55);}
+.hero .tot{font-size:15px;}
+.hero .ph{position:absolute;bottom:10px;right:16px;font-size:11px;color:rgba(255,255,255,.7);font-style:italic;}
+.body{padding:26px 22px 60px;}
+.scan{font-size:12px;letter-spacing:.5px;color:var(--verde);text-transform:uppercase;margin-bottom:10px;}
+h1{font-family:var(--serif);font-size:30px;font-weight:500;color:var(--terra);line-height:1.15;margin-bottom:4px;}
+.sci{font-family:var(--serif);font-style:italic;color:var(--pietra);font-size:17px;margin-bottom:18px;}
+.meta{display:flex;flex-wrap:wrap;gap:10px 26px;padding:14px 0;border-top:1px solid var(--bordo);border-bottom:1px solid var(--bordo);margin-bottom:22px;font-size:15px;color:var(--testo2);}
+.meta .lbl{display:block;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--pietra);margin-bottom:2px;}
+.meta .dial{font-family:var(--serif);color:var(--cotto);font-size:17px;}
+.flag{font-size:12px;color:#a32d2d;font-style:normal;}
+h2{font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:var(--verde);margin:24px 0 8px;font-weight:500;}
+.body p{color:var(--testo2);margin-bottom:6px;}
+.chiudi{margin-top:30px;padding-top:18px;border-top:1px solid var(--bordo);font-size:13.5px;color:var(--pietra);display:flex;gap:12px;align-items:flex-start;}
+.chiudi svg{width:22px;height:22px;flex:0 0 22px;color:var(--oliva);margin-top:2px;}
+
+/* ---------- stato BLOCCATO: nessun QR letto ---------- */
+.lock{padding:52px 26px 60px;text-align:center;}
+.lock .qricon{width:76px;height:76px;color:var(--oliva);margin:0 auto 22px;display:block;}
+.lock h1{font-size:25px;margin-bottom:12px;}
+.lock p{color:var(--testo2);font-size:16px;max-width:420px;margin:0 auto 14px;}
+.lock .hint{background:var(--crema3);border:1px dashed var(--oliva);border-radius:14px;padding:18px 20px;margin:26px auto 0;max-width:440px;text-align:left;font-size:14.5px;color:var(--testo2);}
+.lock .hint strong{color:var(--terra);font-weight:500;}
+.lock .torna{display:inline-block;margin-top:26px;background:var(--oro);color:var(--terra-scuro);padding:12px 24px;border-radius:28px;font-size:15px;font-weight:500;text-decoration:none;}
+.lock .err{color:#a32d2d;font-size:14px;margin-top:16px;}
+
+footer{padding:20px 22px 34px;border-top:1px solid var(--bordo);background:var(--crema3);font-size:12px;color:var(--pietra);text-align:center;}
+footer a{color:var(--cotto);text-decoration:none;}
+
+@media(max-width:420px){
+  body{font-size:16px;}
+  h1{font-size:26px;}
+  .top a.brand span{display:none;}
+}

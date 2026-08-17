@@ -1,0 +1,10 @@
+# Spazio San Magno
+# Le schede botaniche dell'orto selvatico si aprono solo tramite il QR code
+# presente sulla targhetta di ciascuna pianta: restano fuori dai motori di ricerca.
+
+User-agent: *
+Disallow: /orto/
+Disallow: /qr/
+Disallow: /_riservato/
+Disallow: /tools/
+Allow: /

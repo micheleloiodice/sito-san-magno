@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scheda botanica &middot; Spazio San Magno</title>
+<meta name="description" content="Scheda botanica dell'orto selvatico di Spazio San Magno, accessibile inquadrando il QR code sulla targhetta della pianta.">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex, nosnippet">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#4a5638">
+<link rel="stylesheet" href="../assets/orto.css">
+</head>
+<body>
+<div class="page">
+  <div class="top">
+    <a class="brand" href="../index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#d8b04a" stroke-width="1.6" aria-hidden="true"><path d="M12 2C8 6 7 10 12 14c5-4 4-8 0-12z"/><path d="M12 14v8M7 22h10"/></svg>
+      <span>Spazio San Magno</span>
+    </a>
+    <div class="switch">
+      <button class="on" data-l="it" onclick="setLang('it')">IT</button><button data-l="en" onclick="setLang('en')">EN</button><button data-l="fr" onclick="setLang('fr')">FR</button>
+    </div>
+  </div>
+  <div id="app"></div>
+  <noscript>
+    <div class="lock"><h1>Scheda botanica</h1>
+    <p>Per leggere la scheda occorre attivare JavaScript nel browser.<br>
+    JavaScript must be enabled to read this card.<br>
+    JavaScript doit &ecirc;tre activ&eacute; pour lire cette fiche.</p></div>
+  </noscript>
+  <footer>
+    PNRR M1C3 &middot; Intervento 2.2 &mdash; <a href="../index.html#orto">Orto selvatico di San Magno</a>
+  </footer>
+</div>
+<!-- I testi della scheda sono cifrati: la chiave di lettura si trova solo nel
+     QR code della targhetta davanti alla pianta. -->
+<script id="dati" type="application/octet-stream">{"c":"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","t":"cfdbda86526286bd"}</script>
+<script src="../assets/orto.js"></script>
+</body>
+</html>

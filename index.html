@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spazio San Magno · Architettura e paesaggio rurale dell'Alta Murgia</title>
+<meta name="description" content="Recupero dell'edificio rurale del 1813 e dei jazzi in contrada San Magno (Corato, Alta Murgia): laboratorio del paesaggio, orto selvatico didattico, eventi e visite guidate. Progetto PNRR M1C3 Intervento 2.2.">
+<meta name="theme-color" content="#4a5638">
+<style>
+  :root{
+    --terra:#4a5638; --terra-scuro:#3a4429; --verde:#6e8b54; --oliva:#8a9a6a;
+    --oro:#d8b04a; --cotto:#c9714e; --pietra:#7a6f5c; --pietra-chiara:#a99c84;
+    --crema:#fbf7ee; --crema-2:#f5efe3; --crema-3:#ece3d2; --bordo:#e0d6c2;
+    --testo:#3a3327; --testo-soft:#5f5849;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);color:var(--testo);background:var(--crema);line-height:1.7;font-size:17px;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-weight:500;line-height:1.2;}
+  h2{font-family:var(--serif);font-size:34px;color:var(--terra);}
+  h3{font-size:20px;color:var(--terra);}
+  p{margin-bottom:1rem;color:var(--testo-soft);}
+  a{color:var(--cotto);text-decoration:none;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  .eyebrow{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--pietra);margin-bottom:14px;}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(74,86,56,.97);backdrop-filter:blur(6px);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1080px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:10px;color:var(--crema);font-size:18px;font-weight:500;letter-spacing:.5px;}
+  .brand svg{width:26px;height:26px;}
+  .menu{display:flex;gap:22px;align-items:center;}
+  .menu a{color:#e6dcc6;font-size:14px;transition:color .2s;}
+  .menu a:hover{color:var(--oro);}
+  .menu a.cta{background:var(--oro);color:var(--terra-scuro);padding:7px 18px;border-radius:24px;font-weight:500;}
+  .menu a.cta:hover{background:#e6c25e;color:var(--terra-scuro);}
+  .burger{display:none;background:none;border:none;color:var(--crema);font-size:26px;cursor:pointer;}
+
+  /* HERO */
+  .hero{position:relative;background:linear-gradient(135deg,#48572f 0%,#6e7e54 55%,#9aa074 100%);color:var(--crema);padding:110px 0 130px;overflow:hidden;}
+  .hero .wrap{position:relative;z-index:2;}
+  .hero h1{font-family:var(--serif);font-size:clamp(34px,6vw,58px);color:#fdfaf2;max-width:760px;margin-bottom:18px;}
+  .hero p.lead{font-size:19px;color:#f0e9d8;max-width:560px;margin-bottom:28px;}
+  .hero .eyebrow{color:#e6dcc6;}
+  .hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{display:inline-block;padding:13px 26px;border-radius:30px;font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;border:1px solid transparent;}
+  .btn-primary{background:var(--oro);color:var(--terra-scuro);}
+  .btn-primary:hover{background:#e6c25e;}
+  .btn-ghost{background:transparent;border-color:#f0e9d8;color:#fdfaf2;}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);}
+  .ridge{position:absolute;bottom:-1px;left:0;right:0;height:70px;background:var(--crema);z-index:1;clip-path:polygon(0 100%,8% 60%,18% 85%,28% 45%,40% 78%,52% 40%,63% 72%,74% 38%,85% 68%,94% 48%,100% 75%,100% 100%);}
+
+  /* STATS */
+  .stats{background:var(--crema);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--bordo);border-radius:14px;overflow:hidden;margin-top:-30px;position:relative;z-index:3;background:var(--crema);box-shadow:0 8px 30px rgba(74,86,56,.08);}
+  .stat{padding:26px 18px;text-align:center;border-right:1px solid var(--bordo);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:var(--serif);font-size:38px;color:var(--verde);line-height:1;}
+  .stat .lbl{font-size:13px;color:var(--pietra);margin-top:8px;}
+
+  section{padding:72px 0;}
+  section.alt{background:var(--crema-3);}
+  section.dark{background:var(--terra);color:var(--crema-2);}
+  section.dark h2{color:#fdfaf2;}
+  section.dark p{color:#dcd3bf;}
+  section.dark .eyebrow{color:var(--oro);}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center;}
+  .figure{background:linear-gradient(135deg,var(--crema-3),var(--bordo));border-radius:16px;min-height:330px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--pietra);border:1px solid var(--bordo);text-align:center;padding:24px;}
+  .figure svg{width:64px;height:64px;opacity:.55;margin-bottom:12px;}
+  .figure .cap{font-size:13px;font-style:italic;}
+
+  /* TIMELINE */
+  .timeline{position:relative;margin-top:34px;}
+  .tl-item{display:flex;gap:22px;padding-bottom:30px;position:relative;}
+  .tl-item:before{content:"";position:absolute;left:53px;top:34px;bottom:-4px;width:2px;background:var(--bordo);}
+  .tl-item:last-child:before{display:none;}
+  .tl-year{flex:0 0 90px;text-align:right;font-family:var(--serif);font-size:20px;color:var(--cotto);padding-top:4px;}
+  .tl-dot{flex:0 0 14px;width:14px;height:14px;border-radius:50%;background:var(--verde);border:3px solid var(--crema-3);margin-top:9px;z-index:1;}
+  .tl-body h3{font-size:18px;margin-bottom:4px;}
+  .tl-body p{margin-bottom:0;font-size:15px;}
+
+  /* RESTAURO (video) */
+  section.restauro{background:#14160f;color:#e6dcc6;}
+  section.restauro h2{color:#fdfaf2;}
+  section.restauro p{color:#c4bba4;}
+  section.restauro .eyebrow{color:var(--oro);}
+  .restauro-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:center;margin-top:30px;}
+  .video-frame{background:#000;border:1px solid #2a2d22;border-radius:16px;padding:10px;max-width:430px;margin:0 auto;width:100%;}
+  .video-frame video{width:100%;display:block;border-radius:10px;background:#000;}
+  .ba-legend{display:flex;gap:22px;margin-top:18px;}
+  .ba-legend span{display:flex;align-items:center;gap:8px;font-size:14px;color:#c4bba4;}
+  .ba-dot{width:14px;height:4px;border-radius:2px;}
+  .ba-pre{background:var(--cotto);}
+  .ba-post{background:var(--verde);}
+  @media(max-width:820px){.restauro-grid{grid-template-columns:1fr;gap:26px;}}
+
+  /* CARDS */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:38px;}
+  .card{background:var(--crema);border:1px solid var(--bordo);border-radius:14px;padding:26px;transition:transform .2s,box-shadow .2s;}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(74,86,56,.1);}
+  .card .ic{width:46px;height:46px;border-radius:12px;background:var(--crema-3);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .card .ic svg{width:24px;height:24px;}
+  .card h3{font-size:17px;margin-bottom:8px;}
+  .card p{font-size:14.5px;margin-bottom:0;}
+
+  /* ORTO: elenco delle essenze */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .chip{background:var(--crema);border:1px solid var(--bordo);border-radius:24px;padding:7px 16px 7px 8px;font-size:14px;color:var(--testo-soft);display:inline-flex;align-items:center;gap:9px;}
+  .chip .n{font-family:var(--serif);font-size:12.5px;color:var(--verde);background:var(--crema-3);border-radius:50%;width:23px;height:23px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 23px;}
+  .chip .nome{line-height:1.25;}
+  .chip .nome i{display:block;font-size:12px;color:var(--pietra-chiara);font-family:var(--serif);}
+
+  /* ORTO: come funzionano i QR */
+  .qr-box{background:var(--crema);border:1px dashed var(--oliva);border-radius:16px;padding:26px 28px;margin-top:30px;}
+  .qr-box-head{display:flex;gap:16px;align-items:flex-start;}
+  .qr-box-head > svg{width:46px;height:46px;color:var(--verde);flex:0 0 46px;}
+  .qr-box h3{margin-bottom:5px;}
+  .qr-box p{font-size:14.5px;}
+  .qr-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;padding-top:22px;border-top:1px solid var(--bordo);}
+  .qr-step{font-size:14px;color:var(--testo-soft);}
+  .qr-step .k{font-family:var(--serif);font-size:13px;color:var(--verde);display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+  .qr-step .k b{background:var(--verde);color:var(--crema);width:21px;height:21px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:12px;font-weight:500;flex:0 0 21px;}
+  .qr-langs{font-size:13px;color:var(--pietra);margin-top:20px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+  .qr-langs span{background:var(--crema-3);border:1px solid var(--bordo);border-radius:16px;padding:3px 11px;letter-spacing:.5px;}
+  @media(max-width:820px){.qr-steps{grid-template-columns:1fr;gap:14px;}}
+
+  /* EVENTI — stile della tabella del calendario, per ora non usato in pagina:
+     il calendario mese per mese e' stato rimosso in attesa delle date definitive.
+     Si conserva per poterlo reinserire senza rifare lo stile. */
+  .ev-table{width:100%;border-collapse:collapse;margin-top:34px;background:var(--crema);border:1px solid var(--bordo);border-radius:14px;overflow:hidden;}
+  .ev-table th{background:var(--terra);color:var(--crema-2);text-align:left;padding:14px 18px;font-size:13px;letter-spacing:.5px;text-transform:uppercase;font-weight:500;}
+  .ev-table td{padding:14px 18px;border-top:1px solid var(--bordo);font-size:15px;color:var(--testo-soft);vertical-align:top;}
+  .ev-table tr:hover td{background:var(--crema-2);}
+  .tag{display:inline-block;font-size:12px;padding:3px 10px;border-radius:20px;font-weight:500;}
+  .tag.lab{background:#e7efd9;color:#3b6d11;}
+  .tag.vis{background:#f3e3d8;color:#993c1d;}
+  .tag.inc{background:#ece4f6;color:#3c3489;}
+  .tag.conv{background:#f9ecd0;color:#854f0b;}
+
+  /* TERRITORIO */
+  .terr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:38px;}
+  .terr{display:flex;gap:16px;padding:20px;background:var(--crema);border:1px solid var(--bordo);border-radius:14px;}
+  .terr svg{width:30px;height:30px;color:var(--cotto);flex:0 0 30px;margin-top:3px;}
+  .terr h3{font-size:16px;margin-bottom:4px;}
+  .terr p{font-size:14px;margin-bottom:0;}
+
+  /* PARTNERS */
+  .partners{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
+  .partner{background:var(--terra-scuro);border:1px solid #5a6845;border-radius:10px;padding:12px 18px;font-size:14px;color:var(--crema-2);}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+  form{display:flex;flex-direction:column;gap:14px;}
+  label{font-size:13px;color:var(--pietra);margin-bottom:-6px;}
+  input,select,textarea{font-family:var(--sans);font-size:15px;padding:12px 14px;border:1px solid var(--bordo);border-radius:10px;background:var(--crema);color:var(--testo);}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 3px rgba(110,139,84,.15);}
+  .info-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px;}
+  .info-row svg{width:24px;height:24px;color:var(--oro);flex:0 0 24px;margin-top:3px;}
+  .info-row .it{font-size:15px;color:var(--crema-2);}
+  .info-row .it span{display:block;font-size:13px;color:#b9ad95;}
+
+  /* FOOTER */
+  footer{background:var(--terra-scuro);color:#c4bba4;padding:46px 0 28px;font-size:14px;}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:34px;margin-bottom:30px;}
+  footer h4{color:var(--crema-2);font-size:15px;font-weight:500;margin-bottom:14px;}
+  footer a{color:#c4bba4;display:block;margin-bottom:7px;}
+  footer a:hover{color:var(--oro);}
+  .pnrr{border-top:1px solid #4a5638;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:12.5px;color:#9c9078;}
+
+  @media(max-width:820px){
+    .menu{display:none;}
+    .burger{display:block;}
+    .menu.open{display:flex;flex-direction:column;position:absolute;top:60px;right:16px;background:var(--terra);padding:18px 22px;border-radius:12px;gap:14px;box-shadow:0 12px 30px rgba(0,0,0,.3);}
+    .two-col,.contact-grid{grid-template-columns:1fr;gap:30px;}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .stat:nth-child(2){border-right:none;}
+    .cards,.terr-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .ev-table{display:block;overflow-x:auto;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#d8b04a" stroke-width="1.6"><path d="M12 2C8 6 7 10 12 14c5-4 4-8 0-12z"/><path d="M12 14v8M7 22h10"/></svg>
+      Spazio San Magno
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#luogo">Il luogo</a>
+      <a href="#restauro">Il restauro</a>
+      <a href="#orto">Orto selvatico</a>
+      <a href="#attivita">Attività</a>
+      <a href="#territorio">Territorio</a>
+      <a href="#contatti" class="cta">Prenota una visita</a>
+    </nav>
+    <button class="burger" onclick="document.getElementById('menu').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top" style="padding-top:110px;">
+  <div class="wrap">
+    <p class="eyebrow">Alta Murgia · Corato · Parco Nazionale</p>
+    <h1>Dove la transumanza torna a parlare</h1>
+    <p class="lead">Un edificio rurale del 1813 e i suoi quattro jazzi rinascono come laboratorio del paesaggio e orto selvatico didattico, nel cuore della Murgia nord-barese.</p>
+    <div class="hero-btns">
+      <a href="#luogo" class="btn btn-primary">Scopri il luogo</a>
+      <a href="#attivita" class="btn btn-ghost">Attività e laboratori</a>
+    </div>
+  </div>
+  <div class="ridge"></div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat"><div class="num">1813</div><div class="lbl">anno inciso sul concio di chiave</div></div>
+      <div class="stat"><div class="num">250</div><div class="lbl">anni del grande gelso</div></div>
+      <div class="stat"><div class="num">4</div><div class="lbl">corti-jazzo a paretoni a secco</div></div>
+      <div class="stat"><div class="num">XII</div><div class="lbl">secolo della chiesetta rurale</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- IL LUOGO E LA STORIA -->
+<section id="luogo">
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <p class="eyebrow">Il luogo e la storia</p>
+        <h2>Una "posta" nel cuore dell'Alta Murgia</h2>
+        <p>In contrada San Magno, lungo la S.P. 19, sorge un sistema di poste, jazzi e muretti a secco nato dalla pastorizia e dalla transumanza. L'edificio recuperato era l'antico ricovero dei coloni che da Corato salivano in Murgia per la semina del grano, la vendemmia e la cura delle greggi.</p>
+        <p>Quattro ambienti si aprono su uno spazio articolato in corti-jazzo; all'interno, un focolare per il ristoro, ampie nicchie nella spessa muratura in pietra calcarea. Sul concio di chiave dell'ingresso centrale si legge ancora la data: <strong>1813</strong>.</p>
+        <p>Intorno alla chiesetta rurale di San Magno, costruita nel XII secolo sopra una neviera, gli eredi degli antichi coloni custodiscono da generazioni questo paesaggio identitario.</p>
+      </div>
+      <div class="figure">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 21h18M5 21V11l7-5 7 5v10M9 21v-5h6v5"/><path d="M2 11l10-7 10 7"/></svg>
+        <div class="cap">Edificio rurale ex "ricovero coloni" e aree pertinenziali degli jazzi</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-year">XII sec.</div><div class="tl-dot"></div><div class="tl-body"><h3>La chiesetta sulla neviera</h3><p>San Magno diventa crocevia della transumanza: complessi rurali si organizzano attorno alla chiesa, abitata sin dal Neolitico.</p></div></div>
+      <div class="tl-item"><div class="tl-year">1813</div><div class="tl-dot"></div><div class="tl-body"><h3>Il ricovero dei coloni</h3><p>Viene edificato il corpo di fabbrica a quattro vani, con focolare e copertura a falde in legno, alloggio stagionale di coloni e pastori.</p></div></div>
+      <div class="tl-item"><div class="tl-year">1828</div><div class="tl-dot"></div><div class="tl-body"><h3>I coloni di San Magno</h3><p>Un atto rogato a Trani affida ai coloni l'apertura e l'uso liturgico della chiesetta: un legame tramandato fino ad oggi.</p></div></div>
+      <div class="tl-item"><div class="tl-year">Oggi</div><div class="tl-dot"></div><div class="tl-body"><h3>Il recupero conservativo</h3><p>Restauro a regola d'arte con tecniche tradizionali — cuci e scuci, tetti ventilati in legno, manto in coppi recuperati — per restituire il bene alla comunità.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- IL RESTAURO (VIDEO) -->
+<section class="restauro" id="restauro">
+  <div class="wrap">
+    <div class="restauro-grid">
+      <div>
+        <p class="eyebrow">Il restauro</p>
+        <h2>Dal rudere al recupero, in tre dimensioni</h2>
+        <p>Dal rilievo fotogrammetrico con drone nascono i modelli 3D del bene: il "prima", con le coperture crollate e le murature sconnesse, e il "dopo", con i tetti in legno e coppi ricostruiti secondo la tecnica tradizionale.</p>
+        <p>Un confronto che racconta l'intero intervento di risanamento conservativo — cuci e scuci, pulitura dei paramenti in pietra a vista, ripristino del camino e dei sistemi di raccolta dell'acqua piovana — nel rispetto dell'identità dell'edificio del 1813.</p>
+        <div class="ba-legend">
+          <span><span class="ba-dot ba-pre"></span> Prima dell'intervento</span>
+          <span><span class="ba-dot ba-post"></span> Dopo il recupero</span>
+        </div>
+      </div>
+      <div>
+        <div class="video-frame">
+          <video controls preload="metadata" playsinline poster="poster-restauro.jpg">
+            <source src="video.webm" type="video/webm">
+            Il tuo browser non supporta la riproduzione del video.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORTO SELVATICO -->
+<section class="alt" id="orto">
+  <div class="wrap">
+    <p class="eyebrow">Orto selvatico e biodiversità</p>
+    <h2>Un percorso sensoriale tra le essenze della Murgia</h2>
+    <p style="max-width:680px;">All'interno dei paretoni dei quattro jazzi prende forma l'"orto selvatico": un cammino tra alberi da frutto spontanei, fiori e arbusti autoctoni che invita a fermarsi, toccare, odorare e riconoscere. Un laboratorio a cielo aperto di educazione ambientale, alimentare e botanica.</p>
+    <p style="font-size:14px;color:var(--pietra);margin-top:18px;margin-bottom:0;">Le venti essenze del percorso, nell'ordine in cui si incontrano. La scheda botanica di ciascuna si apre soltanto in loco, inquadrando il QR code della targhetta.</p>
+    <div class="chips">
+      <span class="chip"><span class="n">1</span><span class="nome">Quercia roverella<i>Quercus pubescens</i></span></span>
+      <span class="chip"><span class="n">2</span><span class="nome">Mandorlo dolce<i>Prunus dulcis</i></span></span>
+      <span class="chip"><span class="n">3</span><span class="nome">Ciliegio 'Ferrovia'<i>Prunus avium</i></span></span>
+      <span class="chip"><span class="n">4</span><span class="nome">Pesco platicarpa<i>Prunus persica var. platycarpa</i></span></span>
+      <span class="chip"><span class="n">5</span><span class="nome">Albicocco 'Cibo del Paradiso'<i>Prunus armeniaca</i></span></span>
+      <span class="chip"><span class="n">6</span><span class="nome">Noce<i>Juglans regia</i></span></span>
+      <span class="chip"><span class="n">7</span><span class="nome">Melocotogno<i>Cydonia oblonga</i></span></span>
+      <span class="chip"><span class="n">8</span><span class="nome">Amarena<i>Prunus cerasus</i></span></span>
+      <span class="chip"><span class="n">9</span><span class="nome">Biancospino<i>Crataegus monogyna</i></span></span>
+      <span class="chip"><span class="n">10</span><span class="nome">Gelso bianco<i>Morus alba</i></span></span>
+      <span class="chip"><span class="n">11</span><span class="nome">Gelso rosso<i>Morus rubra</i></span></span>
+      <span class="chip"><span class="n">12</span><span class="nome">Pero selvatico<i>Pyrus pyraster</i></span></span>
+      <span class="chip"><span class="n">13</span><span class="nome">Fico<i>Ficus carica</i></span></span>
+      <span class="chip"><span class="n">14</span><span class="nome">Finocchietto selvatico<i>Foeniculum vulgare</i></span></span>
+      <span class="chip"><span class="n">15</span><span class="nome">Ferula<i>Ferula communis</i></span></span>
+      <span class="chip"><span class="n">16</span><span class="nome">Asfodelo<i>Asphodelus ramosus</i></span></span>
+      <span class="chip"><span class="n">17</span><span class="nome">Asparago selvatico<i>Asparagus acutifolius</i></span></span>
+      <span class="chip"><span class="n">18</span><span class="nome">Malva<i>Malva sylvestris</i></span></span>
+      <span class="chip"><span class="n">19</span><span class="nome">Melissa<i>Melissa officinalis</i></span></span>
+      <span class="chip"><span class="n">20</span><span class="nome">Rovo<i>Rubus ulmifolius</i></span></span>
+    </div>
+
+    <div class="qr-box">
+      <div class="qr-box-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v7h-7M17 21h.01"/></svg>
+        <div>
+          <h3>Ogni essenza ha il suo QR code</h3>
+          <p style="margin-bottom:0;">Davanti a ciascuna pianta una targhetta numerata rimanda alla descrizione botanica, al nome dialettale e agli usi locali, con traduzione in inglese e francese. Le schede vivono soltanto lungo il percorso: non sono raggiungibili da questo sito né dai motori di ricerca, e si aprono unicamente inquadrando il codice sul posto. All'interno dei locali, riprese aeree con drone offrono una visione a 360° del territorio.</p>
+        </div>
+      </div>
+      <div class="qr-steps">
+        <div class="qr-step">
+          <div class="k"><b>1</b> Trova la targhetta</div>
+          Il numero sulla targhetta corrisponde a quello dell'elenco qui sopra.
+        </div>
+        <div class="qr-step">
+          <div class="k"><b>2</b> Inquadra il codice</div>
+          Basta la fotocamera del telefono: nessuna app da installare.
+        </div>
+        <div class="qr-step">
+          <div class="k"><b>3</b> Leggi la scheda</div>
+          Si apre nella lingua del telefono, con il nome dialettale murgiano e gli usi tradizionali.
+        </div>
+      </div>
+      <div class="qr-langs">
+        Schede disponibili in <span>Italiano</span><span>English</span><span>Français</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ATTIVITÀ ED EVENTI -->
+<section id="attivita">
+  <div class="wrap">
+    <p class="eyebrow">Attività ed eventi</p>
+    <h2>Da marzo a ottobre, il paesaggio si fa scuola</h2>
+    <p style="max-width:680px;">Il bene è aperto su programmazione e prenotazione. Laboratori per le fasce deboli, concerti, visite guidate ed eventi formativi rivolti a scuole, associazioni, escursionisti e famiglie.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#639922" stroke-width="1.5"><path d="M12 2v6M9 5h6M5 22V12a7 7 0 0114 0v10M9 22v-5h6v5"/></svg></div>
+        <h3>Laboratori didattici</h3>
+        <p>Flora murgiana, piante officinali e commestibili, educazione alimentare ed Agenda 2030, con attività per alunni con bisogni educativi specifici.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <h3>Concerti ed eventi culturali</h3>
+        <p>Musica nella natura, laboratori teatrali, concorsi di fotografia e convegni sulle vie della transumanza e i paesaggi rurali storici.</p>
+      </div>
+      <div class="card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#534ab7" stroke-width="1.5"><circle cx="9" cy="7" r="3"/><path d="M3 21v-2a5 5 0 015-5h2a5 5 0 015 5v2M16 3.5a3 3 0 010 7M21 21v-2a5 5 0 00-3-4.5"/></svg></div>
+        <h3>Inclusione sociale</h3>
+        <p>Percorsi con la Casa Famiglia, le neurodiversità e l'Unione Italiana Ciechi: il paesaggio come esperienza percettiva e momento di aggregazione.</p>
+      </div>
+    </div>
+
+    <p style="font-size:13.5px;color:var(--pietra);margin-top:30px;">Contributo simbolico di accesso a sostegno della manutenzione del bene.</p>
+  </div>
+</section>
+
+<!-- TERRITORIO -->
+<section class="dark" id="territorio">
+  <div class="wrap">
+    <p class="eyebrow">Rete e territorio</p>
+    <h2>Un nodo tra i cammini dell'Alta Murgia</h2>
+    <p style="max-width:680px;">Il sito si riappropria del suo antico ruolo di "Posta": un crocevia tra tratturi, ciclovie e itinerari culturali, a pochi chilometri da Castel del Monte e dentro il Parco Nazionale dell'Alta Murgia.</p>
+
+    <div class="terr-grid">
+      <div class="terr">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/></svg>
+        <div><h3>Cammini e ciclovie</h3><p>Via Francigena, Cammino Materano, Ciclovia dell'Acquedotto, Sentiero Italia CAI, ciclovia Jazzo Rosso–San Magno.</p></div>
+      </div>
+      <div class="terr">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.5 6H20l-4.5 4 2 7L12 15l-5.5 4 2-7L4 8h5.5z"/></svg>
+        <div><h3>Castel del Monte</h3><p>Patrimonio UNESCO, ben visibile da San Magno: escursioni e visite guidate verso la meta-simbolo della Murgia.</p></div>
+      </div>
+      <div class="terr">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C7 2 4 6 4 11c0 6 8 11 8 11s8-5 8-11c0-5-3-9-8-9z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <div><h3>Parco Nazionale Alta Murgia</h3><p>Zona C "Aree di protezione", Rete Natura 2000 (ZPS-ZSC), candidatura a UNESCO Geopark.</p></div>
+      </div>
+      <div class="terr">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3C9 6 9 18 12 21"/><circle cx="12" cy="12" r="9"/></svg>
+        <div><h3>Aree Interne (SNAI)</h3><p>Nel cuore della strategia Alta Murgia, tra Minervino, Poggiorsini e Spinazzola: turismo lento e mobilità dolce.</p></div>
+      </div>
+    </div>
+
+    <h3 style="color:#fdfaf2;margin-top:46px;margin-bottom:6px;">La rete di collaborazioni</h3>
+    <p style="margin-bottom:0;">Il progetto fa sistema con un partenariato di associazioni e istituzioni del territorio.</p>
+    <div class="partners">
+      <span class="partner">Archeoclub – Corato/BAT</span>
+      <span class="partner">Ente Parco Alta Murgia</span>
+      <span class="partner">Accademia Musicale "La Stravaganza"</span>
+      <span class="partner">Ass. culturale "Harambè"</span>
+      <span class="partner">Cinovìa – Centro escursionistico cinofilo</span>
+      <span class="partner">UNISCO Network per lo sviluppo locale</span>
+      <span class="partner">Alliance Française – Bari</span>
+      <span class="partner">Linea D'Onda</span>
+      <span class="partner">Casa Famiglia di Corato</span>
+      <span class="partner">Unione Italiana Ciechi – Corato</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATTI / PRENOTAZIONI -->
+<section class="alt" id="contatti">
+  <div class="wrap">
+    <p class="eyebrow">Prenota la tua visita</p>
+    <h2>Vieni a conoscere San Magno</h2>
+    <div class="contact-grid" style="margin-top:36px;">
+      <form onsubmit="event.preventDefault();this.reset();document.getElementById('ok').style.display='block';">
+        <label>Nome e cognome</label>
+        <input type="text" placeholder="Il tuo nome" required>
+        <label>Email</label>
+        <input type="email" placeholder="nome@email.it" required>
+        <label>Tipo di visita</label>
+        <select>
+          <option>Visita guidata individuale</option>
+          <option>Gruppo / associazione</option>
+          <option>Scuola — laboratorio didattico</option>
+          <option>Evento culturale o concerto</option>
+          <option>Attività di inclusione sociale</option>
+        </select>
+        <label>Messaggio</label>
+        <textarea rows="4" placeholder="Periodo desiderato, numero di partecipanti, esigenze particolari..."></textarea>
+        <button type="submit" class="btn btn-primary" style="border:none;align-self:flex-start;">Invia richiesta</button>
+        <p id="ok" style="display:none;color:#3b6d11;font-size:14px;margin-top:4px;">Grazie! La tua richiesta è stata registrata: ti ricontatteremo per confermare data e orario.</p>
+      </form>
+      <div style="background:var(--terra);border-radius:16px;padding:32px;color:var(--crema-2);">
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2C7.5 2 4 5.5 4 10c0 6 8 12 8 12s8-6 8-12c0-4.5-3.5-8-8-8z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <div class="it">Contrada San Magno<span>S.P. 19 km 10+250 · Corato (BA) — Foglio 93</span></div>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8 9.6a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>
+          <div class="it">Visite su prenotazione<span>Aperture programmate da marzo a ottobre</span></div>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
+          <div class="it">info@spaziosanmagno.it<span>Per gruppi, scuole e associazioni</span></div>
+        </div>
+        <div class="info-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div class="it">Come arrivare<span>A 15 km da Corato, raggiungibile anche in bicicletta. Bike-sharing in progetto con il Comune.</span></div>
+        </div>
+        <div style="border-top:1px solid #5a6845;margin-top:8px;padding-top:18px;font-size:14px;color:#cdc4ac;">Il giardino botanico è curato dall'agronomo Dott. Michele Loiodice. Gestione diretta, attività non economica a fini culturali, educativi e di inclusione.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4 style="display:flex;align-items:center;gap:9px;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d8b04a" stroke-width="1.6"><path d="M12 2C8 6 7 10 12 14c5-4 4-8 0-12z"/><path d="M12 14v8M7 22h10"/></svg> Spazio San Magno</h4>
+        <p style="color:#9c9078;font-size:14px;max-width:320px;">Recupero, conoscenza e fruizione del patrimonio architettonico e paesaggistico rurale dell'Alta Murgia. Un bene custodito e restituito alla comunità.</p>
+      </div>
+      <div>
+        <h4>Esplora</h4>
+        <a href="#luogo">Il luogo e la storia</a>
+        <a href="#restauro">Il restauro</a>
+        <a href="#orto">Orto selvatico</a>
+        <a href="#attivita">Attività ed eventi</a>
+        <a href="#territorio">Rete e territorio</a>
+      </div>
+      <div>
+        <h4>Visita</h4>
+        <a href="#contatti">Prenota una visita</a>
+        <a href="#contatti">Come arrivare</a>
+        <a href="#contatti">Scuole e gruppi</a>
+      </div>
+    </div>
+    <div class="pnrr">
+      <span>Intervento finanziato dall'Unione Europea — NextGenerationEU · PNRR M1C3 Investimento 2.2 "Protezione e valorizzazione dell'architettura e del paesaggio rurale".</span>
+      <span>© Spazio San Magno · Corato (BA)</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('#menu a').forEach(function(a){
+    a.addEventListener('click',function(){document.getElementById('menu').classList.remove('open');});
+  });
+</script>
+</body>
+</html>

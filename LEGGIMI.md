@@ -212,11 +212,17 @@ Il repository contiene **solo** i file pubblici: `index.html`, `robots.txt`,
 cifrate e la chiave non è mai stata caricata.
 
 **Il video non è nel repository.** Pesa 37 MB e l'upload dal browser di GitHub
-si fermava a 25 MB, quindi è allegato alla *release* con tag `media`. Il tag
-`<video>` in `index.html` ha due sorgenti: prima quella della release, poi il
-file `video.webm` locale, usata quando apri il sito dalla cartella o senza
-rete. Se rigeneri la release, il tag deve restare `media`, altrimenti
-l'indirizzo nella pagina non corrisponde più.
+si fermava a 25 MB, quindi è allegato alla *release* con tag
+**`mediaonpublish`**. Il tag `<video>` in `index.html` ha due sorgenti: prima
+quella della release, poi il file `video.webm` locale, usata quando apri il
+sito dalla cartella o senza rete.
+
+L'indirizzo del video contiene il nome del tag, quindi **tag e pagina devono
+combaciare**: se rifai o rinomini la release, aggiorna la riga `<source>` in
+`index.html`. Il nome `mediaonpublish` è nato per un refuso — nel campo del tag
+era finito anche il testo del pulsante *"Create new tag: … on publish"* — ma
+funziona ed è invisibile ai visitatori, quindi si è preferito adeguare la
+pagina invece di rifare il caricamento da 37 MB.
 
 ### Aggiornare il sito
 

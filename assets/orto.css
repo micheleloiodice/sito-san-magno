@@ -5,7 +5,10 @@
 
 :root{
   --terra:#4a5638; --terra-scuro:#3a4429; --verde:#6e8b54; --oliva:#8a9a6a;
-  --oro:#d8b04a; --cotto:#c9714e; --pietra:#7a6f5c;
+  --oro:#d8b04a; --cotto:#c9714e; --pietra:#6e6453;
+  /* varianti leggibili quando il colore fa da TESTO: le schede si leggono
+     sul telefono, spesso in pieno sole, quindi il contrasto va tenuto alto. */
+  --cotto-testo:#9e5030; --verde-testo:#566d42;
   --crema:#fbf7ee; --crema2:#f5efe3; --crema3:#ece3d2; --bordo:#e0d6c2;
   --testo:#3a3327; --testo2:#5f5849;
   --serif:Georgia,'Times New Roman',serif;
@@ -33,14 +36,14 @@ body{font-family:var(--sans);background:var(--crema2);color:var(--testo);line-he
 .hero .tot{font-size:15px;}
 .hero .ph{position:absolute;bottom:10px;right:16px;font-size:11px;color:rgba(255,255,255,.7);font-style:italic;}
 .body{padding:26px 22px 60px;}
-.scan{font-size:12px;letter-spacing:.5px;color:var(--verde);text-transform:uppercase;margin-bottom:10px;}
+.scan{font-size:12px;letter-spacing:.5px;color:var(--verde-testo);text-transform:uppercase;margin-bottom:10px;}
 h1{font-family:var(--serif);font-size:30px;font-weight:500;color:var(--terra);line-height:1.15;margin-bottom:4px;}
 .sci{font-family:var(--serif);font-style:italic;color:var(--pietra);font-size:17px;margin-bottom:18px;}
 .meta{display:flex;flex-wrap:wrap;gap:10px 26px;padding:14px 0;border-top:1px solid var(--bordo);border-bottom:1px solid var(--bordo);margin-bottom:22px;font-size:15px;color:var(--testo2);}
 .meta .lbl{display:block;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--pietra);margin-bottom:2px;}
-.meta .dial{font-family:var(--serif);color:var(--cotto);font-size:17px;}
+.meta .dial{font-family:var(--serif);color:var(--cotto-testo);font-size:17px;}
 .flag{font-size:12px;color:#a32d2d;font-style:normal;}
-h2{font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:var(--verde);margin:24px 0 8px;font-weight:500;}
+h2{font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:var(--verde-testo);margin:24px 0 8px;font-weight:500;}
 .body p{color:var(--testo2);margin-bottom:6px;}
 .chiudi{margin-top:30px;padding-top:18px;border-top:1px solid var(--bordo);font-size:13.5px;color:var(--pietra);display:flex;gap:12px;align-items:flex-start;}
 .chiudi svg{width:22px;height:22px;flex:0 0 22px;color:var(--oliva);margin-top:2px;}
@@ -56,7 +59,7 @@ h2{font-size:15px;letter-spacing:.5px;text-transform:uppercase;color:var(--verde
 .lock .err{color:#a32d2d;font-size:14px;margin-top:16px;}
 
 footer{padding:20px 22px 34px;border-top:1px solid var(--bordo);background:var(--crema3);font-size:12px;color:var(--pietra);text-align:center;}
-footer a{color:var(--cotto);text-decoration:none;}
+footer a{color:var(--cotto-testo);text-decoration:none;}
 
 @media(max-width:420px){
   body{font-size:16px;}

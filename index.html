@@ -12,16 +12,24 @@
 <link rel="canonical" href="https://www.spaziosanmagno.it/">
 
 <!-- Anteprima quando il link viene condiviso su WhatsApp, Facebook, Telegram.
-     Manca l'immagine: appena avrai una fotografia del bene, salvala nel sito e
-     aggiungi <meta property="og:image" content="https://www.spaziosanmagno.it/nome.jpg">
-     con le dimensioni consigliate di 1200x630 pixel. -->
+     L'immagine e' og-spazio-san-magno.jpg: 1200x630 pixel, il formato che le
+     piattaforme si aspettano. Se un giorno la sostituisci, tieni le stesse
+     dimensioni e cambia anche il nome del file, altrimenti i social continuano
+     a mostrare la vecchia versione dalla loro cache. -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="Spazio San Magno">
 <meta property="og:url" content="https://www.spaziosanmagno.it/">
 <meta property="og:title" content="Spazio San Magno · Architettura e paesaggio rurale dell'Alta Murgia">
 <meta property="og:description" content="Un edificio rurale del 1813 e i suoi quattro jazzi rinascono come laboratorio del paesaggio e orto selvatico didattico, nel cuore della Murgia nord-barese.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://www.spaziosanmagno.it/og-spazio-san-magno.jpg">
+<meta property="og:image:secure_url" content="https://www.spaziosanmagno.it/og-spazio-san-magno.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="L'edificio rurale del 1813 in contrada San Magno, dopo il restauro conservativo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.spaziosanmagno.it/og-spazio-san-magno.jpg">
 
 <!-- Dati strutturati: aiutano Google a capire che si tratta di un luogo
      visitabile e a mostrarne posizione e contatti nei risultati di ricerca. -->
@@ -31,6 +39,7 @@
   "@type": "TouristAttraction",
   "name": "Spazio San Magno",
   "url": "https://www.spaziosanmagno.it/",
+  "image": "https://www.spaziosanmagno.it/og-spazio-san-magno.jpg",
   "email": "info@spaziosanmagno.it",
   "description": "Edificio rurale del 1813 e sistema di quattro jazzi in contrada San Magno, recuperati come laboratorio del paesaggio e orto selvatico didattico, nel Parco Nazionale dell'Alta Murgia.",
   "address": {
@@ -58,7 +67,10 @@
 <style>
   :root{
     --terra:#4a5638; --terra-scuro:#3a4429; --verde:#6e8b54; --oliva:#8a9a6a;
-    --oro:#d8b04a; --cotto:#c9714e; --pietra:#7a6f5c; --pietra-chiara:#a99c84;
+    --oro:#d8b04a; --cotto:#c9714e; --pietra:#6e6453; --pietra-chiara:#7e7058;
+    /* --cotto resta il terracotta delle icone; --cotto-testo e' la sua
+       versione leggibile, da usare quando il colore fa da TESTO. */
+    --cotto-testo:#9e5030;
     --crema:#fbf7ee; --crema-2:#f5efe3; --crema-3:#ece3d2; --bordo:#e0d6c2;
     --testo:#3a3327; --testo-soft:#5f5849;
     --serif:Georgia,'Times New Roman',serif;
@@ -71,7 +83,7 @@
   h2{font-family:var(--serif);font-size:34px;color:var(--terra);}
   h3{font-size:20px;color:var(--terra);}
   p{margin-bottom:1rem;color:var(--testo-soft);}
-  a{color:var(--cotto);text-decoration:none;}
+  a{color:var(--cotto-testo);text-decoration:none;}
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
   .eyebrow{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--pietra);margin-bottom:14px;}
 
@@ -113,20 +125,24 @@
   section.alt{background:var(--crema-3);}
   section.dark{background:var(--terra);color:var(--crema-2);}
   section.dark h2{color:#fdfaf2;}
-  section.dark p{color:#dcd3bf;}
-  section.dark .eyebrow{color:var(--oro);}
+  section.dark p{color:#e7dfcc;}
+  section.dark .eyebrow{color:#e1c272;}
 
   .two-col{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center;}
   .figure{background:linear-gradient(135deg,var(--crema-3),var(--bordo));border-radius:16px;min-height:330px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--pietra);border:1px solid var(--bordo);text-align:center;padding:24px;}
   .figure svg{width:64px;height:64px;opacity:.55;margin-bottom:12px;}
   .figure .cap{font-size:13px;font-style:italic;}
+  /* variante con fotografia reale */
+  .figure.photo{display:block;padding:0;overflow:hidden;background:var(--crema-3);text-align:left;}
+  .figure.photo img{display:block;width:100%;height:clamp(280px,34vw,430px);object-fit:cover;object-position:center;}
+  .figure.photo .cap{padding:12px 16px;color:var(--pietra);}
 
   /* TIMELINE */
   .timeline{position:relative;margin-top:34px;}
   .tl-item{display:flex;gap:22px;padding-bottom:30px;position:relative;}
   .tl-item:before{content:"";position:absolute;left:53px;top:34px;bottom:-4px;width:2px;background:var(--bordo);}
   .tl-item:last-child:before{display:none;}
-  .tl-year{flex:0 0 90px;text-align:right;font-family:var(--serif);font-size:20px;color:var(--cotto);padding-top:4px;}
+  .tl-year{flex:0 0 90px;text-align:right;font-family:var(--serif);font-size:20px;color:var(--cotto-testo);padding-top:4px;}
   .tl-dot{flex:0 0 14px;width:14px;height:14px;border-radius:50%;background:var(--verde);border:3px solid var(--crema-3);margin-top:9px;z-index:1;}
   .tl-body h3{font-size:18px;margin-bottom:4px;}
   .tl-body p{margin-bottom:0;font-size:15px;}
@@ -170,7 +186,7 @@
   .qr-box p{font-size:14.5px;}
   .qr-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;padding-top:22px;border-top:1px solid var(--bordo);}
   .qr-step{font-size:14px;color:var(--testo-soft);}
-  .qr-step .k{font-family:var(--serif);font-size:13px;color:var(--verde);display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+  .qr-step .k{font-family:var(--serif);font-size:13px;color:#566d42;display:flex;align-items:center;gap:8px;margin-bottom:5px;}
   .qr-step .k b{background:var(--verde);color:var(--crema);width:21px;height:21px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:12px;font-weight:500;flex:0 0 21px;}
   .qr-langs{font-size:13px;color:var(--pietra);margin-top:20px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
   .qr-langs span{background:var(--crema-3);border:1px solid var(--bordo);border-radius:16px;padding:3px 11px;letter-spacing:.5px;}
@@ -193,8 +209,12 @@
   .terr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:38px;}
   .terr{display:flex;gap:16px;padding:20px;background:var(--crema);border:1px solid var(--bordo);border-radius:14px;}
   .terr svg{width:30px;height:30px;color:var(--cotto);flex:0 0 30px;margin-top:3px;}
-  .terr h3{font-size:16px;margin-bottom:4px;}
-  .terr p{font-size:14px;margin-bottom:0;}
+  .terr h3{font-size:17px;margin-bottom:5px;}
+  /* le schede hanno fondo chiaro dentro una sezione scura: il testo deve
+     tornare al colore scuro, altrimenti eredita quello della sezione
+     (chiaro su chiaro) e diventa illeggibile. */
+  section.dark .terr h3{color:var(--terra);}
+  section.dark .terr p{font-size:15px;line-height:1.55;margin-bottom:0;color:var(--testo);}
 
   /* PARTNER — stile dell'elenco dei partner, per ora non usato in pagina:
      i nomi verranno reinseriti dopo la conferma di ciascuna realta'.
@@ -219,14 +239,14 @@
   .info-row{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px;}
   .info-row svg{width:24px;height:24px;color:var(--oro);flex:0 0 24px;margin-top:3px;}
   .info-row .it{font-size:15px;color:var(--crema-2);}
-  .info-row .it span{display:block;font-size:13px;color:#b9ad95;}
+  .info-row .it span{display:block;font-size:13px;color:#ccc4b2;}
   .mappa{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px;}
   .mappa a.vai{display:inline-flex;align-items:center;gap:8px;background:var(--oro);color:var(--terra-scuro);padding:9px 17px;border-radius:22px;font-size:14px;font-weight:500;transition:background .2s;}
   .mappa a.vai:hover{background:#e6c25e;}
   .mappa a.vai svg{width:16px;height:16px;flex:0 0 16px;color:var(--terra-scuro);margin:0;}
   .mappa a.alt{color:#e6dcc6;font-size:13.5px;border-bottom:1px solid rgba(230,220,198,.35);padding-bottom:1px;}
   .mappa a.alt:hover{color:var(--oro);border-bottom-color:var(--oro);}
-  .info-row .it span.coord{margin-top:10px;font-size:12.5px;color:#a99c84;letter-spacing:.3px;-webkit-user-select:all;user-select:all;}
+  .info-row .it span.coord{margin-top:10px;font-size:12.5px;color:#cbc4b5;letter-spacing:.3px;-webkit-user-select:all;user-select:all;}
 
   /* FOOTER */
   footer{background:var(--terra-scuro);color:#c4bba4;padding:46px 0 28px;font-size:14px;}
@@ -234,7 +254,7 @@
   footer h4{color:var(--crema-2);font-size:15px;font-weight:500;margin-bottom:14px;}
   footer a{color:#c4bba4;display:block;margin-bottom:7px;}
   footer a:hover{color:var(--oro);}
-  .pnrr{border-top:1px solid #4a5638;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:12.5px;color:#9c9078;}
+  .pnrr{border-top:1px solid #4a5638;padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:12.5px;color:#b4ab98;}
 
   @media(max-width:820px){
     .menu{display:none;}
@@ -307,10 +327,12 @@
         <p>Quattro ambienti si aprono su uno spazio articolato in corti-jazzo; all'interno, un focolare per il ristoro, ampie nicchie nella spessa muratura in pietra calcarea. Sul concio di chiave dell'ingresso centrale si legge ancora la data: <strong>1813</strong>.</p>
         <p>Intorno alla chiesetta rurale di San Magno, costruita nel XII secolo sopra una neviera, gli eredi degli antichi coloni custodiscono da generazioni questo paesaggio identitario.</p>
       </div>
-      <div class="figure">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 21h18M5 21V11l7-5 7 5v10M9 21v-5h6v5"/><path d="M2 11l10-7 10 7"/></svg>
-        <div class="cap">Edificio rurale ex "ricovero coloni" e aree pertinenziali degli jazzi</div>
-      </div>
+      <figure class="figure photo">
+        <img src="IMG_3748.JPEG"
+             alt="L'edificio rurale del 1813, ex ricovero dei coloni, in contrada San Magno (Corato, Alta Murgia)"
+             loading="lazy" decoding="async">
+        <figcaption class="cap">Edificio rurale ex "ricovero coloni" e aree pertinenziali degli jazzi</figcaption>
+      </figure>
     </div>
 
     <div class="timeline">
@@ -542,7 +564,7 @@
     <div class="foot-grid">
       <div>
         <h4 style="display:flex;align-items:center;gap:9px;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d8b04a" stroke-width="1.6"><path d="M12 2C8 6 7 10 12 14c5-4 4-8 0-12z"/><path d="M12 14v8M7 22h10"/></svg> Spazio San Magno</h4>
-        <p style="color:#9c9078;font-size:14px;max-width:320px;">Recupero, conoscenza e fruizione del patrimonio architettonico e paesaggistico rurale dell'Alta Murgia. Un bene custodito e restituito alla comunità.</p>
+        <p style="color:#b4ab98;font-size:14px;max-width:320px;">Recupero, conoscenza e fruizione del patrimonio architettonico e paesaggistico rurale dell'Alta Murgia. Un bene custodito e restituito alla comunità.</p>
       </div>
       <div>
         <h4>Esplora</h4>
